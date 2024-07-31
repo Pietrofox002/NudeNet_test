@@ -1,7 +1,6 @@
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
-use tauri::Manager;
 use walkdir::WalkDir;
 
 use crate::models::ScanProgress;
@@ -11,16 +10,16 @@ use crate::utils::{is_valid_image, is_image_nsfw};
 pub async fn select_folder(
     window: tauri::Window,
     path: String,
-    scanSubfolders: bool,
-    minSize: u64,
-    maxSize: u64,
+    scan_subfolders: bool,
+    min_size: u64,
+    max_size: u64,
     extensions: Vec<String>,
 ) -> Result<(), String> {
     println!("Select folder function called");
     println!("Selected folder: {}", path);
-    println!("Scan subfolders: {}", scanSubfolders);
-    println!("Min size: {} KB", minSize);
-    println!("Max size: {} KB", maxSize);
+    println!("Scan subfolders: {}", scan_subfolders);
+    println!("Min size: {} KB", min_size);
+    println!("Max size: {} KB", max_size);
     println!("Extensions: {:?}", extensions);
 
     let progress = Arc::new(Mutex::new(ScanProgress { scanned_count: 0, nsfw_count: 0 }));
@@ -30,7 +29,7 @@ pub async fn select_folder(
         for entry in WalkDir::new(&path)
             .follow_links(true)
             .into_iter()
-            .filter_entry(|e| scanSubfolders || e.depth() <= 1)
+            .filter_entry(|e| scan_subfolders || e.depth() <= 1)
         {
             let entry = match entry {
                 Ok(entry) => entry,
@@ -42,7 +41,7 @@ pub async fn select_folder(
             }
 
             let path = entry.path();
-            if !is_valid_image(path, &extensions, minSize, maxSize) {
+            if !is_valid_image(path, &extensions, min_size, max_size) {
                 continue;
             }
 
