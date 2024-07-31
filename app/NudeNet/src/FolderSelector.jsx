@@ -19,7 +19,10 @@ const FolderSelector = ({ selectedFolder, setSelectedFolder, isScanning, setIsSc
 
         await invoke('select_folder', { 
           path: selected,
-          ...scanOptions
+          scanSubfolders: scanOptions.scanSubfolders,
+          minSize: scanOptions.minSize,
+          maxSize: scanOptions.maxSize,
+          extensions: scanOptions.extensions
         });
 
         setIsScanning(false);
