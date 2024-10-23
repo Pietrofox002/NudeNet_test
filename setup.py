@@ -8,9 +8,9 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = "nudenet"
 DESCRIPTION = "Lightweight Nudity Detection"
-URL = "https://github.com/notAI-tech/nudenet"
-EMAIL = "praneeth@bpraneeth.com"
-AUTHOR = "BEDAPUDI PRANEETH"
+URL = "https://github.com/Pietrofox002/NudeNet_test"
+EMAIL = "pietrofox.public@gmail.com"
+AUTHOR = "Pietro Fox"
 REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "3.0.8"
 
